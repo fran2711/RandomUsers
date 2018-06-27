@@ -7,28 +7,62 @@
 //
 
 import UIKit
+import Alamofire
 
-class UsersTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class UsersTableViewController: UIViewController {
 
     @IBOutlet weak var userTableView: UITableView!
     
+    let baseUrl = "https://randomuser.me/api/?page="
+    let genderUrl = "&gender=female"
+    let resultsUrl = "&results=20"
+    var actualPage: Int?
+    
+    var userId: String?
+    var usersArray = [User]()
+    var usersDictionary = [String: User]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        callForUsers()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+    
+    // MARK: - WS
+    
+    func callForUsers() {
+        
+        if actualPage == nil {
+            actualPage = 1
+        }
+        
+        let requestUrl = baseUrl + String(actualPage!) + genderUrl + resultsUrl
+        
+        Alamofire.request(requestUrl).responseJSON { (response) in
+            
+            guard let responseJSON = response.result.value as? [String: AnyObject],
+                let usersArray = responseJSON["results"] as? [[String: AnyObject]]
+                else {
+                    print("Error while fetching products: \(String(describing: response.result.error))")
+                    return
+            }
+            
+            print("Respuesta json: \(responseJSON)")
+            print("respuesta userArray: \(usersArray)")
+            
+            for usuario in usersArray {
+                let usr = User(dictionary: usuario)
+                self.usersArray.append(usr)
+                DispatchQueue.main.async {
+                    self.userTableView.reloadData()
+                }
+            }
+        }
+        
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
-    }
 
     /*
     // MARK: - Navigation
