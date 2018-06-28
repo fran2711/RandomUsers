@@ -8,26 +8,45 @@
 
 import Foundation
 import UIKit
+import ObjectMapper
 
-class User: NSObject {
+class UserResponse: Mappable {
+    var results: [User]?
     
-    var first_name: String?
-    var name: String?
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        results <- map["results"]
+    }
+    
+    
+}
+
+class User: Mappable {
+    
+    var firstName: String?
+    var lastName: String?
     var email: String?
     var cell: String?
     var largeImage: String?
     var thumbnail: String?
     var id: String?
     
-    init(dictionary: [String: AnyObject]){
-        super.init()
+    required init?(map: Map) {
         
-        id = dictionary["uuid"] as? String
-        cell = dictionary["cell"] as? String
-        first_name = dictionary["first_name"] as? String
-        name = dictionary["name"] as? String
-        email = dictionary["email"] as? String
-        largeImage = dictionary["large"] as? String
-        thumbnail = dictionary["thumbnail"] as? String
     }
+    
+    func mapping(map: Map) {
+        firstName <- map["name.first"]
+        lastName <- map["name.last"]
+        id <- map["login.uuid"]
+        cell <- map["cell"]
+        email <- map["email"]
+        largeImage <- map["picture.large"]
+        thumbnail <- map["picture.thumbnail"]
+        
+    }
+    
+   
 }

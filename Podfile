@@ -7,5 +7,7 @@ target 'RandomUser' do
 
   # Pods for RandomUser
   pod 'Alamofire'
+  pod 'SDWebImage'
+  pod 'AlamofireObjectMapper'
 
 end

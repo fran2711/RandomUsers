@@ -17,6 +17,7 @@
 		A1E8231E20E428B800F7BB6C /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E8231D20E428B800F7BB6C /* UsersTableViewController.swift */; };
 		A1E8233420E43C6600F7BB6C /* UsersTableViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E8233320E43C6600F7BB6C /* UsersTableViewController+UITableView.swift */; };
 		A1E8233620E43C8100F7BB6C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E8233520E43C8100F7BB6C /* User.swift */; };
+		A1E8233C20E458C700F7BB6C /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E8233B20E458C700F7BB6C /* UserDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		A1E8231D20E428B800F7BB6C /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		A1E8233320E43C6600F7BB6C /* UsersTableViewController+UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UsersTableViewController+UITableView.swift"; sourceTree = "<group>"; };
 		A1E8233520E43C8100F7BB6C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A1E8233B20E458C700F7BB6C /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		F2FE904EE3E6AD87C87439F7 /* Pods_RandomUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RandomUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 			children = (
 				A1E8233320E43C6600F7BB6C /* UsersTableViewController+UITableView.swift */,
 				A1E8231D20E428B800F7BB6C /* UsersTableViewController.swift */,
+				A1E8233B20E458C700F7BB6C /* UserDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -210,10 +213,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RandomUser/Pods-RandomUser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -246,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E8231720E426CF00F7BB6C /* UsersTableViewCell.swift in Sources */,
+				A1E8233C20E458C700F7BB6C /* UserDetailViewController.swift in Sources */,
 				A1E8230420E4251D00F7BB6C /* AppDelegate.swift in Sources */,
 				A1E8233420E43C6600F7BB6C /* UsersTableViewController+UITableView.swift in Sources */,
 				A1E8233620E43C8100F7BB6C /* User.swift in Sources */,

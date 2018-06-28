@@ -12,66 +12,58 @@ import Alamofire
 class UsersTableViewController: UIViewController {
 
     @IBOutlet weak var userTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let baseUrl = "https://randomuser.me/api/?page="
     let genderUrl = "&gender=female"
     let resultsUrl = "&results=20"
-    var actualPage: Int?
+    var actualPage: Int = 0
     
     var userId: String?
     var usersArray = [User]()
-    var usersDictionary = [String: User]()
+    var userArrayToDetail = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        callForUsers()
+        callForUsers(actualPage)
     }
 
-    
-    
-    
     // MARK: - WS
     
-    func callForUsers() {
-        
-        if actualPage == nil {
-            actualPage = 1
-        }
-        
-        let requestUrl = baseUrl + String(actualPage!) + genderUrl + resultsUrl
+    func callForUsers(_ actualPage: Int) {
+        activityIndicator.startAnimating()
+        let requestUrl = baseUrl + String(actualPage) + genderUrl + resultsUrl
         
         Alamofire.request(requestUrl).responseJSON { (response) in
             
             guard let responseJSON = response.result.value as? [String: AnyObject],
-                let usersArray = responseJSON["results"] as? [[String: AnyObject]]
-                else {
+                let usersArray = responseJSON["results"] as? [[String: AnyObject]]  else {
                     print("Error while fetching products: \(String(describing: response.result.error))")
                     return
             }
             
-            print("Respuesta json: \(responseJSON)")
-            print("respuesta userArray: \(usersArray)")
-            
             for usuario in usersArray {
-                let usr = User(dictionary: usuario)
-                self.usersArray.append(usr)
-                DispatchQueue.main.async {
-                    self.userTableView.reloadData()
+                if let user = User(JSON: usuario) {
+                    self.usersArray.append(user)
+                    print(usersArray)
+                    DispatchQueue.main.async {
+                        self.userTableView.reloadData()
+                    }
                 }
             }
+            self.activityIndicator.stopAnimating()
         }
         
     }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "GoToUserDetail" {
+            guard let vController: UserDetailViewController = segue.destination as? UserDetailViewController else {return}
+            vController.usersArray = userArrayToDetail
+        }
     }
-    */
 
 }
