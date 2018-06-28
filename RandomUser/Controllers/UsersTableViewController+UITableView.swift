@@ -38,6 +38,10 @@ extension UsersTableViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if let thumbnail = usr.thumbnail {
+            
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width / 2
+            cell.profileImageView.clipsToBounds = true
+            
             cell.profileImageView.sd_setImage(with: URL(string: thumbnail), placeholderImage: UIImage(named: "img_no_photo"))
         }
                 
